@@ -1,6 +1,8 @@
 # -*- encoding:utf-8 -*-
 
 import web
+import json
+
 import config
 from daovoice_client import get_daovoice_client
 
@@ -24,7 +26,7 @@ class Hook:
     '''
 
     def POST(self):
-        data = web.data()
+        data = json.loads(web.data())
         topic = data.get("topic")
         if topic == 'conversation.user.replied':
             conversation_data = data['data']
@@ -33,9 +35,10 @@ class Hook:
                 conversation_uuid=conversation_data['conversation_id'],
                 admin_id=config.DAOVOICE_DEFAULT_ADMIN_ID,
                 message_type='comment',
-                message_body= u"You said {} just now. ".format(conversation_message['body'])
+                message_body=u"You said {} just now. ".format(conversation_message['body'])
 
             )
+        return "Hook Success! "
 
 
 if __name__ == '__main__':
