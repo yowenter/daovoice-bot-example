@@ -35,7 +35,7 @@ class Hook:
                 conversation_uuid=conversation_data['conversation_id'],
                 admin_id=config.DAOVOICE_DEFAULT_ADMIN_ID,
                 message_type='comment',
-                message_body=u"You said {} just now. ".format(conversation_message['body'])
+                message_body=u"You said `{}` just now. - From daovoice bot . ".format(conversation_message['body'])
 
             )
         return "Hook Success! "
