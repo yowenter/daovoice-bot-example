@@ -39,6 +39,15 @@ class DaoVoiceClient(requests.Session):
         kwargs['headers']['Content-Type'] = 'application/json'
         return self._post(url, data=json.dumps(data), **self._set_params(kwargs))
 
+    def _raise_for_status(self, response):
+        """
+        :param response:
+        :param explanation:
+        :return: None
+        """
+
+        response.raise_for_status()
+
     def reply_conversation(self, conversation_uuid, admin_id, message_body, message_type):
         path = '/v1/conversations/%s/reply' % conversation_uuid
         data = {
@@ -49,10 +58,10 @@ class DaoVoiceClient(requests.Session):
             'body': message_body
         }
         url = self._url(path)
-        self._post_json(url, data)
+        self._raise_for_status(self._post_json(url, data))
 
 
-daovoice_client = DaoVoiceClient()
+daovoice_client = DaoVoiceClient(base_url=config.DAOVOICE_API)
 
 
 def get_daovoice_client():
