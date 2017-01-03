@@ -40,7 +40,7 @@ class DaoVoiceClient(requests.Session):
         return self._post(url, data=json.dumps(data), **self._set_params(kwargs))
 
     def reply_conversation(self, conversation_uuid, admin_id, message_body, message_type):
-        path = 'v1/conversations/%s/reply' % conversation_uuid
+        path = '/v1/conversations/%s/reply' % conversation_uuid
         data = {
             'admin': {
                 'admin_id': admin_id
