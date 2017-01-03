@@ -30,7 +30,7 @@ class Hook:
         topic = data.get("topic")
         if topic == 'conversation.user.replied':
             conversation_data = data['data']
-            conversation_message = data['conversation_message']
+            conversation_message = conversation_data['conversation_message']
             get_daovoice_client().reply_conversation(
                 conversation_uuid=conversation_data['conversation_id'],
                 admin_id=config.DAOVOICE_DEFAULT_ADMIN_ID,
