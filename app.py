@@ -28,7 +28,7 @@ class Hook:
     def POST(self):
         data = json.loads(web.data())
         topic = data.get("topic")
-        if topic == 'conversation.user.replied':
+        if topic == 'conversation.user.created':
             conversation_data = data['data']
             conversation_message = conversation_data['conversation_message']
             get_daovoice_client().reply_conversation(
