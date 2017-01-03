@@ -15,7 +15,7 @@ class DaoVoiceClient(requests.Session):
 
     '''
 
-    def __init__(self, base_url, timeout=10, headers=None):
+    def __init__(self, base_url=None, timeout=10, headers=None):
         super(DaoVoiceClient, self).__init__()
         self.base_url = base_url or 'https://api.daovoice.io'
         self._timeout = timeout
@@ -50,7 +50,6 @@ class DaoVoiceClient(requests.Session):
         }
         url = self._url(path)
         self._post_json(url, data)
-
 
 
 daovoice_client = DaoVoiceClient()
